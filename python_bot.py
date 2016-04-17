@@ -2,6 +2,7 @@ import telegram
 from telegram.ext import Updater
 from __future__ import unicode_literals
 import logging
+import time
 
 
 token = '184561786:AAGT5NJjxPSqTm3P4b30_hmGLhnTzgZV34s'
@@ -42,3 +43,5 @@ if __name__ == '__main__':
 	# updater.dispatcher.telegram_message_handlers.pop()
 	updater.dispatcher.addTelegramMessageHandler(echo)
 	updater.start_polling()
+	while True:
+		time.sleep(0.2)
