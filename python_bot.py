@@ -44,10 +44,10 @@ def start(bot, update):
 
 def echo(bot, update):
     print dir(update.message)
-    print update.message.audio 
-    if update.message.audio is not None:
+    print update.message.voice
+    if update.message.voice is not None:
         print 'got an audiofile!'
-        response = bot.speech_to_text.recognize(update.message.audio, audio_content_type)
+        response = bot.speech_to_text.recognize(update.message.voice, audio_content_type)
         print response
     else:
         print 'text got'
