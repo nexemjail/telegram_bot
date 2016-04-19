@@ -52,10 +52,10 @@ def echo(bot, update):
         voice_file.download('voice.ogg')
         response = bot.speech_to_text.recognize(open('voice.ogg', 'rb'), audio_content_type)
         print response
-        if response['results'] and response['results'][response['result_index']]['alternatives'][0]['confidence'] >= 0.6:
+        if response['results'] and float(response['results'][response['result_index']]['alternatives'][0]['confidence']) >= 0.6:
             update.message.text = [response['results'][response['result_index']]['alternatives'][0]['transcript']]
             print update.message.text
-    if update.message.text is not None:
+    if update.message.text is not None and update.message.text != '':
         print 'text got'
         response = bot.dialog.conversation(bot.watson_info['dialog_id'],update.message.text,bot.watson_info['client_id'],
                     bot.watson_info['conversation_id'])
