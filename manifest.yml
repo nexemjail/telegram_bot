@@ -2,3 +2,6 @@ applications:
 - path: .
   memory: 500M
   name: telegram-bot
+  no-route : true
+- services:  
+  - dialog-service

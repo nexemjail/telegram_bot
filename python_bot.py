@@ -45,10 +45,14 @@ def start(bot, update):
 
 def echo(bot, update):
     if update.message.audio is not None:
+        print 'got an audiofile!'
         response = bot.speech_to_text.recognize(update.message.audio, audio_content_type)
-    else:    
+        print response
+    else:
+        print 'text got'
         response = bot.dialog.conversation(bot.watson_info['dialog_id'],update.message.text,bot.watson_info['client_id'],
                     bot.watson_info['conversation_id'])
+        print response
     print 'echoing!'
     bot.sendMessage(update.message.chat_id, text ='\n'.join(response['response']))
     print 'message sent!'
