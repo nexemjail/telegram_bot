@@ -43,11 +43,15 @@ def start(bot, update):
 
 
 def echo(bot, update):
-    print dir(update.message)
-    print update.message.voice
+    #print dir(update.message)
+    #print update.message.voice
     if update.message.voice is not None:
         print 'got an audiofile!'
-        response = bot.speech_to_text.recognize(update.message.voice, audio_content_type)
+        voice_file = bot.getFile(update.message.voice.file_id)
+        voice_file.download('voice.ogg')
+        response = bot.speech_to_text.recognize(open('voice.ogg', 'rb'), audio_content_type)
+        print response
+        response = bot.speech_to_text.recognize(voice_file, audio_content_type)
         print response
     else:
         print 'text got'
