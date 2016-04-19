@@ -35,7 +35,6 @@ def start(bot, update):
     bot.speech_to_text = SpeechToTextV1(url=speech_to_text_credentials['url'],
                                         username=speech_to_text_credentials['username'],
                                         password=speech_to_text_credentials['password'])
-    bot.speech_to_text.recognize()
     bot.watson_info['conversation_id'] = response['conversation_id']
     bot.watson_info['client_id'] = response['client_id']
 
