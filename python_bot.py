@@ -35,6 +35,7 @@ def start(bot, update):
     bot.speech_to_text = SpeechToTextV1(url=speech_to_text_credentials['url'],
                                         username=speech_to_text_credentials['username'],
                                         password=speech_to_text_credentials['password'])
+
     bot.watson_info['conversation_id'] = response['conversation_id']
     bot.watson_info['client_id'] = response['client_id']
 
@@ -51,8 +52,9 @@ def echo(bot, update):
         voice_file.download('voice.ogg')
         response = bot.speech_to_text.recognize(open('voice.ogg', 'rb'), audio_content_type)
         print response
-        update.message.text = [response['results'][response['result_index']]['alternatives'][0]['transcript']]
-        print update.message.text
+        if response['results'][response['result_index']]['alternatives'][0]['confidence'] >= 0.6:
+            update.message.text = [response['results'][response['result_index']]['alternatives'][0]['transcript']]
+            print update.message.text
     if update.message.text is not None:
         print 'text got'
         response = bot.dialog.conversation(bot.watson_info['dialog_id'],update.message.text,bot.watson_info['client_id'],
@@ -61,7 +63,9 @@ def echo(bot, update):
         print response
         print 'echoing!'
         bot.sendMessage(update.message.chat_id, text ='\n'.join(text))
-        print 'message sent!'
+    else:
+        bot.sendMessage(update.message.chat_id, text="Don't know! Rly, help me and try again!")
+    print 'message sent!'
 
 if __name__ == '__main__':
     logger = logging.getLogger()
