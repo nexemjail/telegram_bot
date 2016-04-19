@@ -51,15 +51,16 @@ def echo(bot, update):
         voice_file.download('voice.ogg')
         response = bot.speech_to_text.recognize(open('voice.ogg', 'rb'), audio_content_type)
         print response
-        response = bot.speech_to_text.recognize(voice_file, audio_content_type)
-        print response
+        text = [response['results'][response['result_index']]['alternatives'][0]['transcript']]
+        print text
     else:
         print 'text got'
         response = bot.dialog.conversation(bot.watson_info['dialog_id'],update.message.text,bot.watson_info['client_id'],
                     bot.watson_info['conversation_id'])
+        text = response['response']
         print response
     print 'echoing!'
-    bot.sendMessage(update.message.chat_id, text ='\n'.join(response['response']))
+    bot.sendMessage(update.message.chat_id, text ='\n'.join(text))
     print 'message sent!'
 
 if __name__ == '__main__':
