@@ -53,7 +53,7 @@ def echo(bot, update):
         response = bot.speech_to_text.recognize(open('voice.ogg', 'rb'), audio_content_type)
         print response
         if response['results'] and float(response['results'][response['result_index']]['alternatives'][0]['confidence']) >= 0.6:
-            update.message.text = [response['results'][response['result_index']]['alternatives'][0]['transcript']]
+            update.message.text = response['results'][response['result_index']]['alternatives'][0]['transcript']
             print update.message.text
     if update.message.text is not None and update.message.text != '':
         print 'text got'
