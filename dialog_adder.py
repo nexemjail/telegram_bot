@@ -9,5 +9,5 @@ if __name__ == '__main__':
     for f in dialog.get_dialogs()['dialogs']:
         print f
 
-    response = dialog.create_dialog(open('ex1_my.xml','r'), 'test_planets_dialog')
-    print response
+    #response = dialog.create_dialog(open('dialogV2.xml','r'), 'dialogV2')
+    #print response

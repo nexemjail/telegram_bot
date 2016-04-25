@@ -13,7 +13,6 @@ dialog_credinitials = {
     "password": "Mw4bIj47ckGZ",
     "username": "a1d505c8-c92f-4cf7-8fec-9a5df38c53bd"
 }
-#dialog_id = '84f70117-de7b-4c79-8b1a-1958d06aa467'
 dialog_id = 'a103aed4-1141-42da-a618-889f6b634682'
 
 speech_to_text_credentials = {
